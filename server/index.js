@@ -33,6 +33,7 @@ app.get("/", verifyToken,(req, res) => {
     UserModel.find({})
         .then(user => res.json(user))
         .catch(err => res.json(err));
+        
 });
 
 app.post("/createUser", (req, res) => {
