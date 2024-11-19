@@ -5,6 +5,7 @@ const UserModel = require('./model/User');
 const ImageModel = require('./model/ImageModel');
 const multer = require('multer');
 const jwt = require('jsonwebtoken');
+const Tesseract = require('tesseract.js');
 
 const app = express();
 app.use(cors());
@@ -32,7 +33,6 @@ function verifyToken(req, res, next) {
 app.get("/", verifyToken,(req, res) => {
     UserModel.find({})
         .then(user => res.json(user))
-        
         .catch(err => res.json(err));
 
 });
@@ -103,15 +103,30 @@ const upload = multer({ storage: storage });
 
 app.use(express.urlencoded({ extended: false }));
 
-app.post('/uploadImage', upload.single('image'), (req, res) => {
-    if (!req.file) {
-        return res.status(400).json({ error: 'No file uploaded or field name is incorrect.' });
-    }
+// app.post('/uploadImage', upload.single('image'), (req, res) => {
+//     if (!req.file) {
+//         return res.status(400).json({ error: 'No file uploaded or field name is incorrect.' });
+//     }
 
-    const newImage = new ImageModel({ imageUrl: req.file.path });
-    newImage.save()
-        .then(image => res.json(image))
-        .catch(err => res.status(500).json(err));
+//     const newImage = new ImageModel({ imageUrl: req.file.path });
+//     newImage.save()
+//         .then(image => res.json(image))
+//         .catch(err => res.status(500).json(err));
+// });
+
+app.post('/upload', upload.single('image'), (req, res) => {
+
+    Tesseract.recognize(
+        req.file.path,
+        'eng',
+        {
+            logger: info => console.log(info),
+        }
+    ).then(({ data: { text } }) => {
+        res.json({ text });
+    }).catch(err => {
+        res.status(500).json({ error: err.message });
+    });
 });
 // ---------------------------File Upload Code End-----------------------------
 

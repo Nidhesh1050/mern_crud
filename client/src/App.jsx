@@ -7,6 +7,8 @@ import CreateUser from './CreateUser'
 import UpdateUser from './UpdateUser'
 import ThreeDViewer from './ThreeDViewer'
 import Login from './Login'
+import OcrImae from './OcrImae'
+
 
 function App() {
 
@@ -20,6 +22,8 @@ function App() {
         <Route path='/update/:id' element={<UpdateUser/>}></Route>
         <Route path='/threeDViewer' element={<ThreeDViewer/>}></Route>
         <Route path='/login' element={<Login/>}></Route>
+        <Route path='/ocrImae' element={<OcrImae/>}></Route>
+
 
       
        
