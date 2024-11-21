@@ -8,6 +8,7 @@ import UpdateUser from './UpdateUser'
 import ThreeDViewer from './ThreeDViewer'
 import Login from './Login'
 import OcrImae from './OcrImae'
+import Weather from './weatherComponent/Weather'
 
 
 function App() {
@@ -23,6 +24,7 @@ function App() {
         <Route path='/threeDViewer' element={<ThreeDViewer/>}></Route>
         <Route path='/login' element={<Login/>}></Route>
         <Route path='/ocrImae' element={<OcrImae/>}></Route>
+        <Route path='/Weather' element={<Weather/>}></Route>
 
 
       

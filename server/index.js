@@ -30,7 +30,7 @@ function verifyToken(req, res, next) {
     }
 }
 
-app.get("/", verifyToken,(req, res) => {
+app.get("/",(req, res) => {
     UserModel.find({})
         .then(user => res.json(user))
         .catch(err => res.json(err));
@@ -49,8 +49,8 @@ app.post("/login", (req, res) => {
 
    // console.log(req.body); return false;
 
-    const { email, name } = req.body; // Assuming password is in the body
-    UserModel.findOne({ email, name }) // You should hash passwords in a real app
+    const { email, name } = req.body; 
+    UserModel.findOne({ email, name }) 
         .then(user => {
             if (!user) {
                 return res.status(401).json({ error: 'Invalid credentials' });

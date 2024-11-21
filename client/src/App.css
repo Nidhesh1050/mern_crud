@@ -1,7 +1,21 @@
 
-/* body{
-    background-color: slategray !important;
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
+/* body{
+    min-height: 100vh;
+    display: grid;
+    background-color: #e2d4ff;
+} */
 canvas{
     height: 100vh !important;
-} */
+}
+
+
+.app{
+    min-height: 100vh;
+    display: grid;
+    background-color: #e2d4ff;
+}
